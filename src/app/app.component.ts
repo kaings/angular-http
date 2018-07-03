@@ -46,8 +46,9 @@ export class AppComponent {
 
   onGetData() {
     this.serverService.getData().subscribe(
-      (response) => {
-        console.log(response);
+      (data: any[]) => {
+        console.log(data);
+        this.servers = data;
       },
       (error) => {
         console.log(error);

@@ -19,6 +19,11 @@ export class ServerService {
         map(
           (response) => {
             const data = Array.prototype.slice.call(response);
+            /* using POST method will give some unique key which will make the following result an empty array,
+            PUT will NOT give unique key, just an object. In this case, the following will give you array content */
+            for (const x of data) {
+              x.name = '_FETCHED_' + x.name;
+            }
             return data;
           }
         )
