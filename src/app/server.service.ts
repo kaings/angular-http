@@ -15,4 +15,8 @@ export class ServerService {
   getData(): Observable<any> {
     return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json');
   }
+
+  putData(servers: any[]): Observable<any> {
+    return this._httpClient.put('https://test-1-723c2.firebaseio.com/data.json', servers);
+  }
 }

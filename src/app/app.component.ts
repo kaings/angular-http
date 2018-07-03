@@ -54,4 +54,15 @@ export class AppComponent {
       }
     );
   }
+
+  onPutData() {
+    this.serverService.putData(this.servers).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }
