@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class ServerService {
@@ -13,7 +14,15 @@ export class ServerService {
   }
 
   getData(): Observable<any> {
-    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json');
+    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json')
+      .pipe(
+        map(
+          (response) => {
+            const data = Array.prototype.slice.call(response);
+            return data;
+          }
+        )
+      );
   }
 
   putData(servers: any[]): Observable<any> {

@@ -5,9 +5,9 @@
       <button class="btn btn-primary" (click)="onAddServer(serverName.value)">Add Server</button>
       <hr>
       <div class="jumbotron">
-        <button class="btn btn-default" (click)="onPostData()">Post Data</button>
-        <button class="btn btn-info" (click)="onGetData()">Get Data</button>
-        <button class="btn btn-default" (click)="onPutData()">Put Data</button>
+        <button class="btn btn-default" style="margin: 0px 10px" (click)="onPostData()">Post Data</button>
+        <button class="btn btn-info" style="margin: 0px 10px" (click)="onGetData()">Get Data</button>
+        <button class="btn btn-default" style="margin: 0px 10px" (click)="onPutData()">Put Data</button>
       </div>
       <hr>
       <ul class="list-group" *ngFor="let server of servers">
