@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
+import {ServerService} from './server.service';
+// import { HttpModule } from '@angular/http';     // deprecated from ng4.3
 
 import { AppComponent } from './app.component';
 
@@ -12,9 +14,10 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpClientModule
+    // HttpModule     // deprecated from ng4.3
   ],
-  providers: [],
+  providers: [ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
