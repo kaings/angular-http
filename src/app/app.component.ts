@@ -43,4 +43,15 @@ export class AppComponent {
       }
     );
   }
+
+  onGetData() {
+    this.serverService.getData().subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }
