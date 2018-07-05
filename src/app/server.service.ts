@@ -16,7 +16,7 @@ export class ServerService {
   }
 
   getData(): Observable<any> {
-    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data')
+    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json')    // removing .json will cause error. use it to try catch throw error
       .pipe(
         map(
           (response) => {
@@ -31,7 +31,7 @@ export class ServerService {
         ),
         catchError(
           (error: HttpErrorResponse) => {
-            // console.log(error);
+            console.log('getData Error ', error);
             // return throwError(error);  // print out the error
             return throwError('Error Has Occurred ...');   // customise error message
           }
@@ -41,5 +41,23 @@ export class ServerService {
 
   putData(servers: any[]): Observable<any> {
     return this._httpClient.put('https://test-1-723c2.firebaseio.com/data.json', servers);
+  }
+
+  getAppName(): Observable<any> {
+    return this._httpClient.get('https://test-1-723c2.firebaseio.com/appName.json')      // removing .json will cause error. use it to try catch throw error
+      .pipe(
+        map(
+          (response: Response) => {
+            console.log(response);
+            return response;
+          }
+        ),
+        catchError(
+          (error: HttpErrorResponse) => {
+            console.log('getAppName Error ', error);
+            return throwError(error);
+          }
+        )
+      );
   }
 }

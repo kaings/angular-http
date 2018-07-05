@@ -20,6 +20,8 @@ export class AppComponent {
     }
   ];
 
+  appName = this.serverService.getAppName()
+
   constructor(private serverService: ServerService) {}
 
   onAddServer(name: string) {
