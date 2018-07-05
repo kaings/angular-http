@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 @Injectable()
 export class ServerService {
@@ -14,7 +16,7 @@ export class ServerService {
   }
 
   getData(): Observable<any> {
-    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json')
+    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data')
       .pipe(
         map(
           (response) => {
@@ -25,6 +27,13 @@ export class ServerService {
               x.name = '_FETCHED_' + x.name;
             }
             return data;
+          }
+        ),
+        catchError(
+          (error: HttpErrorResponse) => {
+            // console.log(error);
+            // return throwError(error);  // print out the error
+            return throwError('Error Has Occurred ...');   // customise error message
           }
         )
       );
