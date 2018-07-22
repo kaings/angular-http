@@ -10,6 +10,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import {AuthService} from './auth/auth.service';
 
 const routes: Routes = [
   {path: '', component: AppComponent},
@@ -30,7 +31,7 @@ const routes: Routes = [
     HttpClientModule
     // HttpModule     // deprecated from ng4.3
   ],
-  providers: [ServerService],
+  providers: [ServerService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

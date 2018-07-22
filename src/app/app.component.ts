@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServerService} from './server.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   servers = [
     {
       name: 'Testserver',
@@ -67,6 +68,13 @@ export class AppComponent {
         console.log(error);
       }
     );
+  }
+
+  ngOnInit() {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyAKE8bOldF3IglJHsYtM3iV4JWsDV5CPcg',
+      authDomain: 'test-1-723c2.firebaseapp.com'
+    });
   }
 
   onSignout() {
