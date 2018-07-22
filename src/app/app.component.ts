@@ -68,4 +68,8 @@ export class AppComponent {
       }
     );
   }
+
+  onSignout() {
+
+  }
 }
