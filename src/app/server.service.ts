@@ -4,10 +4,11 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
+import {AuthService} from './auth/auth.service';
 
 @Injectable()
 export class ServerService {
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient, private authService: AuthService) {}
 
   postData(servers: any[]): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; testing-header');
@@ -16,7 +17,11 @@ export class ServerService {
   }
 
   getData(): Observable<any> {
-    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json')    // removing .json will cause error. use it to try catch throw error
+    /* get token from auth.service.ts */
+    const tokenKey = this.authService.getToken();
+    console.log('tokenKey', tokenKey);
+
+    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey)    // removing .json will cause error. use it to try catch throw error
       .pipe(
         map(
           (response) => {
@@ -40,7 +45,11 @@ export class ServerService {
   }
 
   putData(servers: any[]): Observable<any> {
-    return this._httpClient.put('https://test-1-723c2.firebaseio.com/data.json', servers);
+    /* get token from auth.service.ts */
+    const tokenKey = this.authService.getToken();
+    console.log('tokenKey', tokenKey);
+
+    return this._httpClient.put('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey, servers);
   }
 
   getAppName(): Observable<any> {
