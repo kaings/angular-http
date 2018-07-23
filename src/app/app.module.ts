@@ -11,9 +11,10 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import {AuthService} from './auth/auth.service';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: '', component: AppComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'sign-up', component: SignupComponent},
   {path: 'sign-in', component: SigninComponent},
 ];
@@ -22,7 +23,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

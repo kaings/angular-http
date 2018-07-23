@@ -4,13 +4,16 @@
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav">
-      <li routerLinkActive="active">
-        <a [routerLink]="['/sign-up']">Register</a>
-      </li>
-      <li routerLinkActive="active">
-        <a [routerLink]="['/sign-in']">Log In</a>
-      </li>
-      <li routerLinkActive="active">
+      <ng-template [ngIf]="!authService.isAuthenticated()">
+        <li routerLinkActive="active">
+          <a [routerLink]="['/sign-up']">Register</a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/sign-in']">Log In</a>
+        </li>
+      </ng-template>
+
+      <li routerLinkActive="active" *ngIf="authService.isAuthenticated()">
         <a (click)="onSignout()">Log Out</a>
       </li>
     </ul>

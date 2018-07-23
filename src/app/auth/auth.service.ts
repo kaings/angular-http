@@ -1,7 +1,12 @@
 import * as firebase from 'firebase';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Injectable} from '@angular/core';
 
+@Injectable()   // Router and ActivatedRoute are services, you need @Injectable()
 export class AuthService {
-  tokenKey: string = 'testingABC...';
+  tokenKey: string;
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   signupUser (email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -20,6 +25,9 @@ export class AuthService {
         (response: any) => {
           console.log('sign-in successful!', response);
 
+          /* if authenticated, and token is stored, navigate to /home */
+          this.router.navigate(['home'], {relativeTo: this.activatedRoute});
+
           firebase.auth().currentUser.getIdToken()
             .then(
               (tokenKey: string) => {
@@ -31,6 +39,7 @@ export class AuthService {
       .catch(
         error => console.log(error)
       );
+
   }
 
   getToken() {
@@ -46,11 +55,22 @@ export class AuthService {
           Instead, put return outside the promise is the way to go */
           // return this.tokenKey;
         }
+      )
+      .catch(
+        error => console.log('Failed fetching token!', error)
       );
 
     console.log('token from signin()... ', this.tokenKey);
     return this.tokenKey;
   }
 
+  isAuthenticated(): boolean {
+    return this.tokenKey != null;
+  }
+
+  signoutUser() {
+    firebase.auth().signOut();
+    this.tokenKey = null;
+  }
 
 }

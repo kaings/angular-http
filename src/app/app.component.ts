@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ServerService} from './server.service';
+import {AuthService} from './auth/auth.service';
+
 import * as firebase from 'firebase';
 
 @Component({
@@ -7,7 +9,7 @@ import * as firebase from 'firebase';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   servers = [
     {
       name: 'Testserver',
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit{
 
   appName = this.serverService.getAppName()
 
-  constructor(private serverService: ServerService) {}
+  constructor(private serverService: ServerService, private authService: AuthService) {}
 
   onAddServer(name: string) {
     this.servers.push({
@@ -54,7 +56,7 @@ export class AppComponent implements OnInit{
         this.servers = data;
       },
       (error) => {
-        console.log(error);
+        console.log('error fetching data...', error);
       }
     );
 
@@ -80,6 +82,6 @@ export class AppComponent implements OnInit{
   }
 
   onSignout() {
-
+    this.authService.signoutUser();
   }
 }
