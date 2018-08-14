@@ -73,4 +73,23 @@ export class AuthService {
     this.tokenKey = null;
   }
 
+  signinWithGoogle() {
+    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then(
+        (response) => {
+          console.log('signinWithGoogle response... ', response);
+
+          firebase.auth().currentUser.getIdToken()
+            .then(
+              (tokenKey: string) => {
+                this.tokenKey = tokenKey;
+              }
+            );
+
+          /* if authenticated, and token is stored, navigate to /home */
+          this.router.navigate(['home'], {relativeTo: this.activatedRoute});
+        }
+      );
+  }
+
 }

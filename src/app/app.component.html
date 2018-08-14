@@ -11,6 +11,9 @@
         <li routerLinkActive="active">
           <a [routerLink]="['/sign-in']">Log In</a>
         </li>
+        <li routerLinkActive="active">
+          <a (click)="onSignInWithGoogle()">Log In with Google</a>
+        </li>
       </ng-template>
 
       <li routerLinkActive="active" *ngIf="authService.isAuthenticated()">

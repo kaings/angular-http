@@ -84,4 +84,8 @@ export class AppComponent implements OnInit {
   onSignout() {
     this.authService.signoutUser();
   }
+
+  onSignInWithGoogle() {
+    this.authService.signinWithGoogle();
+  }
 }
