@@ -21,10 +21,11 @@ export class ServerService {
     const tokenKey = this.authService.getToken();
     console.log('tokenKey', tokenKey);
 
-    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey)    // removing .json will cause error. use it to try catch throw error
+    return this._httpClient.get<any>('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey)    // removing .json will cause error. use it to try catch throw error
       .pipe(
         map(
           (response) => {
+            console.log('server.service_getData... ', response);
             const data = Array.prototype.slice.call(response);
             /* using POST method will give some unique key which will make the following result an empty array,
             PUT will NOT give unique key, just an object. In this case, the following will give you array content */
