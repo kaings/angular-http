@@ -3,7 +3,7 @@ import {ServerService} from './server.service';
 import {AuthService} from './auth/auth.service';
 
 import * as firebase from 'firebase';
-import {HttpEvent} from '@angular/common/http';
+import {HttpEvent, HttpEventType} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -66,10 +66,11 @@ export class AppComponent implements OnInit {
 
   onPutData() {
     this.serverService.putData(this.servers).subscribe(
-      (response) => {
-        console.log('app.component.ts_onPutData response.... ', response);
-        console.log('app.component.ts_onPutData response_loaded.... ', response.loaded);
-        console.log('app.component.ts_onPutData response_total.... ', response.total);
+      (response: HttpEvent<Object>) => {
+        console.log('app.component.ts_onPutData response.... ', response, 'response_HttpEventType.... ',
+          (response.type === HttpEventType.Sent) ? `Sent -- ${response.type}` : 'others');
+        // console.log('app.component.ts_onPutData response_loaded.... ', response.loaded);
+        // console.log('app.component.ts_onPutData response_total.... ', response.total);
 
       },
       (error) => {

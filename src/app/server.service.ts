@@ -77,18 +77,20 @@ export class ServerService {
     const tokenKey = this.authService.getToken();
     // console.log('tokenKey', tokenKey);
 
-    /*
+
     return this._httpClient.put('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey, servers, {
       observe: 'events'   // observe 'events' return types of http events type '0' - 'sent', etc.
     });
-    */
 
+
+    /*
     const req = new HttpRequest('PUT', 'https://test-1-723c2.firebaseio.com/data.json',  servers, {
       reportProgress: true,
       params: new HttpParams().set('auth', tokenKey)
     });
 
     return this._httpClient.request(req);
+    */
   }
 
   getAppName(): Observable<any> {
