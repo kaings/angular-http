@@ -21,6 +21,8 @@ export class ServerService {
     const tokenKey = this.authService.getToken();
     console.log('tokenKey', tokenKey);
 
+    const headers = new HttpHeaders().set('Authorization', 'Bearer blablablablabla12345').append('append-more-headers', 'blablablabla');
+
     /*
     return this._httpClient.get<any>('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey)    // removing .json will cause error. use it to try catch throw error
       .pipe(
@@ -48,7 +50,8 @@ export class ServerService {
 
     return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey,  {
       observe: 'response',    // ref: https://angular.io/api/common/http/HttpClient#get
-      responseType: 'text'
+      responseType: 'text',
+      // headers: headers     // comment out since this this is not expected in Firebase
     })    // removing .json will cause error. use it to try catch throw error
       .pipe(
         map(
