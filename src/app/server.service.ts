@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {catchError} from 'rxjs/operators';
@@ -48,10 +48,11 @@ export class ServerService {
       );
     */
 
-    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey,  {
+    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json',  {
       observe: 'response',    // ref: https://angular.io/api/common/http/HttpClient#get
       responseType: 'text',
       // headers: headers     // comment out since this this is not expected in Firebase
+      params: new HttpParams().set('auth', tokenKey)
     })    // removing .json will cause error. use it to try catch throw error
       .pipe(
         map(
