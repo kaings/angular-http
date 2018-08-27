@@ -3,6 +3,7 @@ import {ServerService} from './server.service';
 import {AuthService} from './auth/auth.service';
 
 import * as firebase from 'firebase';
+import {HttpEvent} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit {
 
   onPostData() {
     this.serverService.postData(this.servers).subscribe(
-      (response) => {
+      (response: HttpEvent<Object>) => {
         console.log(response);
       },
       (error) => {
