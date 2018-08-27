@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
 
   onPostData() {
     this.serverService.postData(this.servers).subscribe(
-      (response: HttpEvent<Object>) => {
+      (response) => {
         console.log(response);
       },
       (error) => {
@@ -67,7 +67,10 @@ export class AppComponent implements OnInit {
   onPutData() {
     this.serverService.putData(this.servers).subscribe(
       (response) => {
-        console.log(response);
+        console.log('app.component.ts_onPutData response.... ', response);
+        console.log('app.component.ts_onPutData response_loaded.... ', response.loaded);
+        console.log('app.component.ts_onPutData response_total.... ', response.total);
+
       },
       (error) => {
         console.log(error);
