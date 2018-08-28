@@ -21,7 +21,7 @@ export class ServerService {
     const tokenKey = this.authService.getToken();
     console.log('tokenKey', tokenKey);
 
-    const headers = new HttpHeaders().set('Authorization', 'Bearer blablablablabla12345').append('append-more-headers', 'blablablabla');
+    // const headers = new HttpHeaders().set('Authorization', 'Bearer blablablablabla12345').append('append-more-headers', 'blablablabla');
 
     /*
     return this._httpClient.get<any>('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey)    // removing .json will cause error. use it to try catch throw error
@@ -48,12 +48,33 @@ export class ServerService {
       );
     */
 
+    /*
     return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json',  {
       observe: 'response',    // ref: https://angular.io/api/common/http/HttpClient#get
       responseType: 'text',
       // headers: headers     // comment out since this this is not expected in Firebase
       params: new HttpParams().set('auth', tokenKey)
     })    // removing .json will cause error. use it to try catch throw error
+      .pipe(
+        map(
+          (response) => {
+            console.log('server.service_getData... ', response);
+
+            return [];
+          }
+        ),
+        catchError(
+          (error: HttpErrorResponse) => {
+            console.log('getData Error ', error);
+            // return throwError(error);  // print out the error
+            return throwError('Error Has Occurred ...');   // customise error message
+          }
+        )
+      );
+    */
+
+
+    return this._httpClient.get('https://test-1-723c2.firebaseio.com/data.json')    // removing .json will cause error. use it to try catch throw error
       .pipe(
         map(
           (response) => {
@@ -78,9 +99,11 @@ export class ServerService {
     // console.log('tokenKey', tokenKey);
 
 
+    /*
     return this._httpClient.put('https://test-1-723c2.firebaseio.com/data.json?auth=' + tokenKey, servers, {
       observe: 'events'   // observe 'events' return types of http events type '0' - 'sent', etc.
     });
+    */
 
 
     /*
@@ -91,6 +114,11 @@ export class ServerService {
 
     return this._httpClient.request(req);
     */
+
+
+    return this._httpClient.put('https://test-1-723c2.firebaseio.com/data.json', servers, {
+      observe: 'events'   // observe 'events' return types of http events type '0' - 'sent', etc.
+    });
   }
 
   getAppName(): Observable<any> {
