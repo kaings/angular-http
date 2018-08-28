@@ -46,8 +46,8 @@ export class AuthService {
     firebase.auth().currentUser.getIdToken()
       .then(
         (tokenKey: string) => {
-          console.log('token from response when getToken() ... ', tokenKey);
-          console.log('token from signin() ... ', this.tokenKey)
+          // console.log('token from response when getToken() ... ', tokenKey);
+          // console.log('token from signin() ... ', this.tokenKey)
           this.tokenKey = tokenKey;
 
           /* the following is NG... since this is async process, the return value at server.service.ts
@@ -60,7 +60,7 @@ export class AuthService {
         error => console.log('Failed fetching token!', error)
       );
 
-    console.log('token from signin()... ', this.tokenKey);
+    // console.log('token from signin()... ', this.tokenKey);
     return this.tokenKey;
   }
 

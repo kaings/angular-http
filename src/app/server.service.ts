@@ -19,7 +19,7 @@ export class ServerService {
   getData(): Observable<any> {
     /* get token from auth.service.ts */
     const tokenKey = this.authService.getToken();
-    console.log('tokenKey', tokenKey);
+    // console.log('tokenKey', tokenKey);
 
     // const headers = new HttpHeaders().set('Authorization', 'Bearer blablablablabla12345').append('append-more-headers', 'blablablabla');
 

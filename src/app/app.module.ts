@@ -13,6 +13,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import {AuthService} from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import {AuthInterceptor} from './auth.interceptor';
+import {LoggingInterceptor} from './logging.interceptor';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -37,7 +38,9 @@ const routes: Routes = [
   providers: [
     ServerService,
     AuthService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
+
   ],
   bootstrap: [AppComponent]
 })
